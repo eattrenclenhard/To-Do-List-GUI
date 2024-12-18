@@ -7,9 +7,15 @@ add_button = sg.Button("Add")
 list_box = sg.Listbox(values=ft.get_todos(), key='todo_item',
                       enable_events=True, size=(45, 10))  # notice the logging of event at each item click
 edit_button = sg.Button('Edit')
+complete_button = sg.Button('Complete')
+exit_button = sg.Button('Exit')
 
 window = sg.Window('My To-Do App',
-                   layout=[[label], [input_box, add_button], [list_box, edit_button]],
+                   layout=[
+                       [label], [input_box, add_button],
+                       [list_box, edit_button, complete_button],
+                       [exit_button]
+                   ],
                    # python recommends 79 char max per line
                    font=('Helvetica', 20)
                    )  # title of the window
@@ -37,9 +43,18 @@ while True:
             ft.write_todos(todos_param=todos)
             # refreshes the list in-place
             window['todo_item'].update(values=todos)
+        case 'Complete':
+            todos = ft.get_todos()
+            todos.remove(values['todo_item'][0])
+            ft.write_todos(todos_param=todos)
+            window['todo_item'].update(values=todos)
+            window['todo_input'].update(value='')
+        case 'Exit':
+            print('Tq for choosing us! Shutting down...')
+            break
         case sg.WIN_CLOSED:
             print('Tq for choosing us! Shutting down...')
-            break  # alternatively, exit() would stop the program completely
+            break  # break would only exit while loop, exit() would stop the program completely
         case 'todo_item':
             # capture the event, then reflects clicked item in list box
             # onto input box in real time
@@ -47,4 +62,5 @@ while True:
             # this is implemented so that input box becomes dynamic in nature. It would now display whichever todo item the user selects
             window['todo_input'].update(value=values['todo_item'][0])
 
+print('sparta!')
 window.close()
