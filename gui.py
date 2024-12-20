@@ -76,6 +76,9 @@ while True:
             # onto input box in real time
             # each click of to-do item is considered one todo_item event
             # this is implemented so that input box becomes dynamic in nature. It would now display whichever todo item the user selects
-            window['todo_input'].update(value=values['todo_item'][0])
+            try:
+                window['todo_input'].update(value=values['todo_item'][0])
+            except IndexError as e:
+                sg.popup("There's nothing in the task list yet, please add at least one.")
 
 window.close()
