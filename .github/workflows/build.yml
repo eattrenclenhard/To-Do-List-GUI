@@ -13,6 +13,11 @@ on:
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - '.github/*'
+      - '*.md'
+      - '.gitignore'
+      - 'todos.txt'
 
 permissions:
   contents: write
