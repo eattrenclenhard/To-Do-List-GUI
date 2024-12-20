@@ -14,11 +14,11 @@ label = sg.Text('Type in a To-Do')
 input_box = sg.InputText(tooltip='Enter todo', key='todo_input')  # no argument required
 # add_button = sg.Button(size=2, image_source='images/add.png', mouseover_colors='Green', tooltip='Add Todo',
 #                        key='Add')
-add_button = sg.Button('Add')  # event takes either button_text label as value
+add_button = sg.Button('Add', tooltip='Add a new task')  # event takes either button_text label as value
 list_box = sg.Listbox(values=ft.get_todos(), key='todo_item',
                       enable_events=True, size=(45, 10))  # notice the logging of event at each item click
-edit_button = sg.Button('Edit')
-complete_button = sg.Button('Complete')
+edit_button = sg.Button('Edit', tooltip='Select a task and then press to edit')
+complete_button = sg.Button('Complete',tooltip='Select a completed task and then press to remove')
 exit_button = sg.Button('Exit')
 
 window = sg.Window('My To-Do App',
